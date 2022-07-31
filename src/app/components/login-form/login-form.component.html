@@ -1,0 +1,66 @@
+<h3>Login</h3>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="loginForm" (ngSubmit)="login(loginForm)">
+          <div class="mb-3">
+            <label for="fullname" class="form-label">Fullname</label>
+            <input type="text" class="form-control" formControlName="fullname" />
+            <div class="form-text text-danger" *ngIf="loginForm.get('fullname')?.touched && loginForm.get('fullname')?.errors?.['required']">
+              Name is required.
+            </div>
+            <div class="form-text text-danger" *ngIf="loginForm.get('fullname')?.touched && loginForm.get('fullname')?.errors?.['pattern']">
+              Name is invalid. Only letters plz.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" formControlName="email" />
+            <div class="form-text text-danger" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.errors?.['required']">
+              Email is required.
+            </div>
+            <div class="form-text text-danger" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.errors?.['email']">
+              Email is incorrect.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              formControlName="password"
+            />
+            <div class="form-text text-danger" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['required']">
+              Password is required.
+            </div>
+            <div class="form-text text-danger" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['minlength']">
+              Password must be at least 4 characters long.
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="!loginForm.valid"
+          >
+            Log In <i class="bi bi-person"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <span>Valid</span>
+    <pre>{{ loginForm.valid }}</pre>
+    
+    <span>Pristine</span>
+    <pre>{{ loginForm.pristine }}</pre>
+   
+    <span>Touched</span>
+    <pre>{{ loginForm.touched }}</pre>
+    
+    <span>Value</span>
+    <pre>{{ loginForm.value | json }}</pre>
+  </div>
+</div>
